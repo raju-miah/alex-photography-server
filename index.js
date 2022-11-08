@@ -32,6 +32,13 @@ async function run() {
             res.send(services);
         });
 
+        app.get('/serviceshome', async (req, res) => {
+            const query = {};
+            const cursor = serviceCollection.find(query);
+            const serviceshome = await cursor.limit(3).toArray();
+            res.send(serviceshome);
+        })
+
         app.get('/services/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
